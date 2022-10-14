@@ -2,24 +2,19 @@ package edu.curtin.imagegrabber;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.ProgressBar;
+
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
-import io.reactivex.rxjava3.annotations.NonNull;
-import io.reactivex.rxjava3.core.Single;
-import io.reactivex.rxjava3.core.SingleObserver;
-import io.reactivex.rxjava3.disposables.Disposable;
-import io.reactivex.rxjava3.schedulers.Schedulers;
+import edu.curtin.imagegrabber.fragments.ListView;
 
 public class ImageDisplay extends AppCompatActivity {
 
@@ -45,24 +40,33 @@ public class ImageDisplay extends AppCompatActivity {
         listView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FragmentManager headerFrag = getSupportFragmentManager();
-                ListView listImages = (ListView) headerFrag.findFragmentById(R.id.fragLayout);
-                if (listImages == null) {
-                    listImages = new ListView(conImages);
-                    headerFrag.beginTransaction().add(R.id.fragLayout, listImages).commit();
+                if (!conImages.isEmpty()) {
+                    FragmentManager fragMan = getSupportFragmentManager();
+                    FragmentTransaction s = fragMan.beginTransaction();
+                    s.replace(R.id.fragLayout, new ListView(conImages), null);
+                    s.commitAllowingStateLoss();
+                }else {
+                    Snackbar notify = Snackbar.make(view, "No Images!", Snackbar.LENGTH_SHORT);
+                    notify.show();
                 }
             }
         });
 
-
+        gridView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (!conImages.isEmpty()) {
+                    FragmentManager fragMan = getSupportFragmentManager();
+                    FragmentTransaction s = fragMan.beginTransaction();
+                    s.replace(R.id.fragLayout, new GridView(conImages), null);
+                    s.commitAllowingStateLoss();
+                }else {
+                    Snackbar notify = Snackbar.make(view, "No Images!", Snackbar.LENGTH_SHORT);
+                    notify.show();
+                }
+            }
+        });
     }
-
-    /*FragmentManager headerFrag = getSupportFragmentManager();
-                ListView view = (ListView) headerFrag.findFragmentById(R.id.header);
-                if (mainHeader == null) {
-                    mainHeader = new MainHeader(resList);
-                    headerFrag.beginTransaction().add(R.id.header, mainHeader).commit();
-                }*/
 
     public ArrayList<Bitmap> convertImage(ArrayList<byte[]> images) {
         ArrayList<Bitmap> bitmaps = new ArrayList<>();

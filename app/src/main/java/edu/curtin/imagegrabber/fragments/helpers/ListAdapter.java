@@ -1,4 +1,4 @@
-package edu.curtin.imagegrabber;
+package edu.curtin.imagegrabber.fragments.helpers;
 
 import android.graphics.Bitmap;
 import android.view.LayoutInflater;
@@ -9,6 +9,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+
+import edu.curtin.imagegrabber.R;
 
 public class ListAdapter extends RecyclerView.Adapter<ListViewHolder>{
 

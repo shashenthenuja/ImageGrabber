@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -13,12 +14,14 @@ import android.view.ViewGroup;
 
 import java.util.ArrayList;
 
+import edu.curtin.imagegrabber.fragments.helpers.ListAdapter;
+
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link ListView#newInstance} factory method to
+ * Use the {@link GridView#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ListView extends Fragment {
+public class GridView extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -28,13 +31,14 @@ public class ListView extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    private ArrayList<Bitmap> images = new ArrayList<>();
 
-    public ListView(ArrayList<Bitmap> images) {
-        this.images = images;
+    ArrayList<Bitmap> image = new ArrayList<>();
+
+    public GridView(ArrayList<Bitmap> image) {
+        this.image = image;
     }
 
-    public ListView() {
+    public GridView() {
         // Required empty public constructor
     }
 
@@ -44,11 +48,11 @@ public class ListView extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment ListView.
+     * @return A new instance of fragment GridView.
      */
     // TODO: Rename and change types and number of parameters
-    public static ListView newInstance(String param1, String param2) {
-        ListView fragment = new ListView();
+    public static GridView newInstance(String param1, String param2) {
+        GridView fragment = new GridView();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -69,10 +73,10 @@ public class ListView extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_list_view, container, false);
-        RecyclerView rv = view.findViewById(R.id.listView);
-        rv.setLayoutManager(new LinearLayoutManager(getContext()));
-        ListAdapter myAdapter = new ListAdapter(images);
+        View view = inflater.inflate(R.layout.fragment_grid_view, container, false);
+        RecyclerView rv = view.findViewById(R.id.gridView);
+        rv.setLayoutManager(new GridLayoutManager(getContext(), 2));
+        GridAdapter myAdapter = new GridAdapter(image);
         rv.setAdapter(myAdapter);
         return view;
     }

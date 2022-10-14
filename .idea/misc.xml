@@ -5,7 +5,9 @@
       <map>
         <entry key="..\:/My Files/Android Studio Projects/COMP2008/Assignments/Assignment 02/Part 02/ImageGrabber/app/src/main/res/layout/activity_image_display.xml" value="0.33" />
         <entry key="..\:/My Files/Android Studio Projects/COMP2008/Assignments/Assignment 02/Part 02/ImageGrabber/app/src/main/res/layout/activity_main.xml" value="0.35260416666666666" />
+        <entry key="..\:/My Files/Android Studio Projects/COMP2008/Assignments/Assignment 02/Part 02/ImageGrabber/app/src/main/res/layout/fragment_grid_view.xml" value="0.17831813576494426" />
         <entry key="..\:/My Files/Android Studio Projects/COMP2008/Assignments/Assignment 02/Part 02/ImageGrabber/app/src/main/res/layout/fragment_list_view.xml" value="0.17831813576494426" />
+        <entry key="..\:/My Files/Android Studio Projects/COMP2008/Assignments/Assignment 02/Part 02/ImageGrabber/app/src/main/res/layout/grid_layout.xml" value="0.33" />
         <entry key="..\:/My Files/Android Studio Projects/COMP2008/Assignments/Assignment 02/Part 02/ImageGrabber/app/src/main/res/layout/list_layout.xml" value="0.33" />
       </map>
     </option>
