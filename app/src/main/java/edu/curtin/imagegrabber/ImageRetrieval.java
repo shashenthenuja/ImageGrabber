@@ -30,7 +30,7 @@ public class ImageRetrieval implements Callable<ArrayList<Bitmap>> {
 
     @Override
     public ArrayList<Bitmap> call() throws Exception {
-        ArrayList<Bitmap> image = null;
+        ArrayList<Bitmap> image = new ArrayList<>();
         ArrayList<String> endpoint = getEndpoint(this.data);
         if(endpoint==null){
             uiActivity.runOnUiThread(new Runnable() {
@@ -52,20 +52,21 @@ public class ImageRetrieval implements Callable<ArrayList<Bitmap>> {
     }
 
     private ArrayList<String> getEndpoint(String data){
-        ArrayList<String> imageUrl = null;
+        ArrayList<String> imageUrl = new ArrayList<>();
         try {
             JSONObject jBase = new JSONObject(data);
             JSONArray jHits = jBase.getJSONArray("hits");
             if(jHits.length() >= 15){
                 for (int i = 0; i < 15; i++) {
+                    System.out.println(">>>> " + jHits.getJSONObject(i));
                     JSONObject jHitsItem = jHits.getJSONObject(i);
-                    imageUrl.add(jHitsItem.getString("largeImageURL"));
+                    imageUrl.add(jHitsItem.getString("previewURL"));
                 }
 
             }else if(jHits.length() > 0){
                 for (int i = 0; i < jHits.length(); i++) {
                     JSONObject jHitsItem = jHits.getJSONObject(i);
-                    imageUrl.add(jHitsItem.getString("largeImageURL"));
+                    imageUrl.add(jHitsItem.getString("previewURL"));
                 }
             }
         } catch (JSONException e) {
@@ -75,7 +76,7 @@ public class ImageRetrieval implements Callable<ArrayList<Bitmap>> {
     }
 
     private ArrayList<Bitmap> getImageFromUrl(ArrayList<String> imageUrl){
-        ArrayList<Bitmap> image = null;
+        ArrayList<Bitmap> image = new ArrayList<>();
         for (String s:imageUrl
              ) {
             Uri.Builder url = Uri.parse(s).buildUpon();
