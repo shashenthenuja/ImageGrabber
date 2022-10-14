@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "23093761710",
+    "project_id": "imagegrabber-6977a",
+    "storage_bucket": "imagegrabber-6977a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:23093761710:android:8231b54a247ec49a977f3f",
+        "android_client_info": {
+          "package_name": "edu.curtin.imagegrabber"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "23093761710-jas5u77phdfnui1u5p9bn79aavoaopup.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDnZmcosG3OCt9fGNEPKf03rsO5W5OUwfw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "23093761710-jas5u77phdfnui1u5p9bn79aavoaopup.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

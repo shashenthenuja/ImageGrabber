@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
+import edu.curtin.imagegrabber.ImageUpload;
 import edu.curtin.imagegrabber.R;
 
 public class ListAdapter extends RecyclerView.Adapter<ListViewHolder>{
@@ -26,6 +27,14 @@ public class ListAdapter extends RecyclerView.Adapter<ListViewHolder>{
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         View view = layoutInflater.inflate(R.layout.list_layout,parent,false);
         ListViewHolder myViewHolder = new ListViewHolder(view);
+
+        myViewHolder.upload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ImageUpload upload = new ImageUpload(view.getContext());
+                upload.uploadImage(image.get(myViewHolder.getAdapterPosition()));
+            }
+        });
         return myViewHolder;
     }
 
