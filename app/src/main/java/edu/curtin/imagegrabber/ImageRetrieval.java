@@ -58,7 +58,6 @@ public class ImageRetrieval implements Callable<ArrayList<Bitmap>> {
             JSONArray jHits = jBase.getJSONArray("hits");
             if(jHits.length() >= 15){
                 for (int i = 0; i < 15; i++) {
-                    System.out.println(">>>> " + jHits.getJSONObject(i));
                     JSONObject jHitsItem = jHits.getJSONObject(i);
                     imageUrl.add(jHitsItem.getString("previewURL"));
                 }

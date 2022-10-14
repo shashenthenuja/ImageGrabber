@@ -2,6 +2,7 @@ package edu.curtin.imagegrabber;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
@@ -11,6 +12,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
@@ -40,6 +43,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (!searchInput.getText().toString().isEmpty()) {
+                    /*Intent intent = new Intent(MainActivity.this, ImageDisplay.class);
+                    intent.putExtra("search", searchInput.getText().toString());
+                    startActivity(intent);*/
                     searchImage();
                 }else {
                     searchInput.setError("Enter text to search!");
@@ -88,24 +94,44 @@ public class MainActivity extends AppCompatActivity {
         searchObservable.subscribe(new SingleObserver<ArrayList<Bitmap>>() {
             @Override
             public void onSubscribe(@NonNull Disposable d) {
-
             }
 
             @Override
             public void onSuccess(@NonNull ArrayList<Bitmap> bitmap) {
-                Toast.makeText(MainActivity.this, "Image loading Ends", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(MainActivity.this, "Image loading Ends", Toast.LENGTH_SHORT).show();
                 loadBar.setVisibility(View.INVISIBLE);
                 images = bitmap;
-                System.out.println(">>>>>>>> " + images.size());
+                sendData(bitmap);
             }
 
             @Override
             public void onError(@NonNull Throwable e) {
-                Toast.makeText(MainActivity.this, "Image loading error, search again" + e.toString(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "Image loading error, search again", Toast.LENGTH_SHORT).show();
                 loadBar.setVisibility(View.INVISIBLE);
             }
         });
+
+        /*Intent intent = new Intent(this, ImageDisplay.class);
+        intent.putExtra("list", searchObservable.blockingGet());
+        startActivity(intent);*/
+
     }
 
+    public void sendData(ArrayList<Bitmap> images) {
+        ArrayList<byte[]> list = new ArrayList<>();
+        for (Bitmap b:images
+             ) {
+            Bitmap bitmap = b;
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.JPEG,80,stream);
+            byte[] byteArray = stream.toByteArray();
+            list.add(byteArray);
+        }
+        if (list.size() > 0 ) {
+            Intent intent = new Intent(this, ImageDisplay.class);
+            intent.putExtra("list", list);
+            startActivity(intent);
+        }
+    }
 
 }
