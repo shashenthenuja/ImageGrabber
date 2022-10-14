@@ -14,6 +14,7 @@ import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 
+import edu.curtin.imagegrabber.fragments.GridView;
 import edu.curtin.imagegrabber.fragments.ListView;
 
 public class ImageDisplay extends AppCompatActivity {
@@ -30,6 +31,7 @@ public class ImageDisplay extends AppCompatActivity {
         ArrayList<byte[]> images = (ArrayList<byte[]>) getIntent().getSerializableExtra("list");
         ArrayList<Bitmap> conImages = convertImage(images);
 
+        // set initial layout
         FragmentManager headerFrag = getSupportFragmentManager();
         ListView listImages = (ListView) headerFrag.findFragmentById(R.id.fragLayout);
         if (listImages == null) {
@@ -37,6 +39,7 @@ public class ImageDisplay extends AppCompatActivity {
             headerFrag.beginTransaction().add(R.id.fragLayout, listImages).commit();
         }
 
+        // change to list layout
         listView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -52,6 +55,7 @@ public class ImageDisplay extends AppCompatActivity {
             }
         });
 
+        // change to grid layout
         gridView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -68,6 +72,7 @@ public class ImageDisplay extends AppCompatActivity {
         });
     }
 
+    // convert byte arrays to bitmap
     public ArrayList<Bitmap> convertImage(ArrayList<byte[]> images) {
         ArrayList<Bitmap> bitmaps = new ArrayList<>();
         for (byte[] b:images

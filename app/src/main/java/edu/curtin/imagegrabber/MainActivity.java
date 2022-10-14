@@ -43,9 +43,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (!searchInput.getText().toString().isEmpty()) {
-                    /*Intent intent = new Intent(MainActivity.this, ImageDisplay.class);
-                    intent.putExtra("search", searchInput.getText().toString());
-                    startActivity(intent);*/
                     searchImage();
                 }else {
                     searchInput.setError("Enter text to search!");
@@ -110,13 +107,9 @@ public class MainActivity extends AppCompatActivity {
                 loadBar.setVisibility(View.INVISIBLE);
             }
         });
-
-        /*Intent intent = new Intent(this, ImageDisplay.class);
-        intent.putExtra("list", searchObservable.blockingGet());
-        startActivity(intent);*/
-
     }
 
+    // convert bitmap to byte array to send through intent
     public void sendData(ArrayList<Bitmap> images) {
         ArrayList<byte[]> list = new ArrayList<>();
         for (Bitmap b:images
@@ -133,5 +126,4 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         }
     }
-
 }
