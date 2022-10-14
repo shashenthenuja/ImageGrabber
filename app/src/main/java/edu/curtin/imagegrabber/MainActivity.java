@@ -12,6 +12,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.snackbar.Snackbar;
+
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
@@ -124,6 +126,8 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(this, ImageDisplay.class);
             intent.putExtra("list", list);
             startActivity(intent);
+        }else {
+            Toast.makeText(MainActivity.this, "No Images To Show!", Toast.LENGTH_SHORT).show();
         }
     }
 }
