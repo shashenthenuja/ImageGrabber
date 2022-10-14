@@ -31,6 +31,7 @@ public class GridAdapter extends RecyclerView.Adapter<GridViewHolder>{
         myViewHolder.upload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // upload current image to firebase
                 ImageUpload upload = new ImageUpload(view.getContext());
                 upload.uploadImage(image.get(myViewHolder.getAdapterPosition()));
             }

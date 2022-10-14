@@ -24,6 +24,7 @@ public class ImageUpload {
         this.context = context;
     }
 
+    // upload image to firebase
     public void uploadImage(Bitmap image) {
         StorageReference storageReference = firebaseStorage.getReferenceFromUrl("gs://imagegrabber-6977a.appspot.com");
 
@@ -46,6 +47,7 @@ public class ImageUpload {
         });
     }
 
+    // convert bitmap image to byte array
     public byte[] convertBitmap(Bitmap image) {
         Bitmap bitmap = image;
         ByteArrayOutputStream stream = new ByteArrayOutputStream();

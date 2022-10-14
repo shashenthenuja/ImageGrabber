@@ -28,7 +28,6 @@ public class MainActivity extends AppCompatActivity {
     EditText searchInput;
     Button loadImage;
     ProgressBar loadBar;
-    ArrayList<Bitmap> images = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,8 +50,9 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    // JAVA RX observer to search images
     public void searchImage() {
-        Toast.makeText(MainActivity.this, "Searching starts", Toast.LENGTH_SHORT).show();
+        Toast.makeText(MainActivity.this, "Searching for Images", Toast.LENGTH_SHORT).show();
         loadBar.setVisibility(View.VISIBLE);
         SearchImage searchTask = new SearchImage(MainActivity.this);
         searchTask.setSearchkey(searchInput.getText().toString());
@@ -66,24 +66,25 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onSuccess(@NonNull String s) {
-                Toast.makeText(MainActivity.this, "Searching Ends", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "Found Images", Toast.LENGTH_SHORT).show();
                 loadBar.setVisibility(View.INVISIBLE);
                 loadImage(s);
             }
 
             @Override
             public void onError(@NonNull Throwable e) {
-                Toast.makeText(MainActivity.this, "Searching Error", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "Error Searching Images", Toast.LENGTH_SHORT).show();
                 loadBar.setVisibility(View.INVISIBLE);
             }
         });
     }
 
+    // JAVA RX observer to retrieve images
     public void loadImage(String response) {
         ImageRetrieval imageRetrievalTask = new ImageRetrieval(MainActivity.this);
         imageRetrievalTask.setData(response);
 
-        Toast.makeText(MainActivity.this, "Image loading starts", Toast.LENGTH_SHORT).show();
+        Toast.makeText(MainActivity.this, "Retrieving Images", Toast.LENGTH_SHORT).show();
         loadBar.setVisibility(View.VISIBLE);
         Single<ArrayList<Bitmap>> searchObservable = Single.fromCallable(imageRetrievalTask);
         searchObservable = searchObservable.subscribeOn(Schedulers.io());
@@ -95,15 +96,14 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onSuccess(@NonNull ArrayList<Bitmap> bitmap) {
-                //Toast.makeText(MainActivity.this, "Image loading Ends", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "Images Retrieved", Toast.LENGTH_SHORT).show();
                 loadBar.setVisibility(View.INVISIBLE);
-                images = bitmap;
                 sendData(bitmap);
             }
 
             @Override
             public void onError(@NonNull Throwable e) {
-                Toast.makeText(MainActivity.this, "Image loading error, search again", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "Error retrieving images", Toast.LENGTH_SHORT).show();
                 loadBar.setVisibility(View.INVISIBLE);
             }
         });

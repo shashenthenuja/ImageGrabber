@@ -56,13 +56,14 @@ public class ImageRetrieval implements Callable<ArrayList<Bitmap>> {
         try {
             JSONObject jBase = new JSONObject(data);
             JSONArray jHits = jBase.getJSONArray("hits");
+            // check if result has more than 15 image urls
             if(jHits.length() >= 15){
                 for (int i = 0; i < 15; i++) {
                     JSONObject jHitsItem = jHits.getJSONObject(i);
                     imageUrl.add(jHitsItem.getString("previewURL"));
                 }
-
             }else if(jHits.length() > 0){
+                // if less than 15 add currently found image urls
                 for (int i = 0; i < jHits.length(); i++) {
                     JSONObject jHitsItem = jHits.getJSONObject(i);
                     imageUrl.add(jHitsItem.getString("previewURL"));
@@ -74,6 +75,7 @@ public class ImageRetrieval implements Callable<ArrayList<Bitmap>> {
         return imageUrl;
     }
 
+    // add bitmap images from image urls
     private ArrayList<Bitmap> getImageFromUrl(ArrayList<String> imageUrl){
         ArrayList<Bitmap> image = new ArrayList<>();
         for (String s:imageUrl

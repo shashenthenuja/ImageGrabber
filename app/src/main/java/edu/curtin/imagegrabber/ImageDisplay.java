@@ -28,6 +28,7 @@ public class ImageDisplay extends AppCompatActivity {
         listView = findViewById(R.id.listBtn);
         gridView = findViewById(R.id.gridBtn);
 
+        // receive byte array and convert to bitmap
         ArrayList<byte[]> images = (ArrayList<byte[]>) getIntent().getSerializableExtra("list");
         ArrayList<Bitmap> conImages = convertImage(images);
 
